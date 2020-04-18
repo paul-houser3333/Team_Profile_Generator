@@ -204,4 +204,36 @@ createServer(teamRoster) {
         });
 
     }).listen(8080);
-}}
+}
+
+async init() {
+
+    let input = '';
+
+    do {
+
+        const employee = this.createEmployee(await this.getEmployeeInfo());
+
+        this.saveEmployeeToDb(employee);
+
+        input =
+            await inquirer
+                .prompt([
+                    {
+                        type: "input",
+                        message: "Type 'yes' if you wish to exit",
+                        name: "exit"
+                    }
+                ]);
+
+    } while (!input.exit);
+
+    const teamRoster = this.createTeamRoster();
+
+    this.createServer(teamRoster);
+}
+}
+
+const app = new App();
+
+app.init();
