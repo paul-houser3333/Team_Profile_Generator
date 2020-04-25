@@ -1,4 +1,4 @@
-const Manager = require("../lib/Manager");
+import Manager from "../lib/Manager";
 
 test("Can set office number via constructor argument", () => {
   const testValue = 100;
